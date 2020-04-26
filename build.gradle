@@ -71,11 +71,12 @@ idea {
 apply plugin: 'org.jetbrains.intellij'
 intellij {
     // IDE version - https://www.jetbrains.com/intellij-repository/releases
-    version = System.getenv().getOrDefault('IDEA_VERSION', 'IU-201.6668.121')
+    version = System.getenv().getOrDefault('IDEA_VERSION', 'IC-201.6668.121')
     pluginName = 'CSV Plugin'
     instrumentCode = true
     updateSinceUntilBuild = false
     downloadSources = true
+    plugins = ['Git4Idea', 'GitHub']
 }
 publishPlugin {
     token = System.getenv().getOrDefault('JI_TOKEN', '')

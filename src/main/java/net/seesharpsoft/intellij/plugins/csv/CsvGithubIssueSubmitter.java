@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.github.api.*;
 import org.jetbrains.plugins.github.api.data.*;
-import org.jetbrains.plugins.github.api.requests.GithubRequestPagination;
+import org.jetbrains.plugins.github.api.data.request.GithubRequestPagination;
 import org.jetbrains.plugins.github.authentication.GithubAuthenticationManager;
 import org.jetbrains.plugins.github.authentication.accounts.GithubAccount;
 
@@ -28,7 +28,7 @@ public class CsvGithubIssueSubmitter extends ErrorReportSubmitter {
     public static final String GIT_USER = "SeeSharpSoft";
     public static final String GIT_REPO = "intellij-csv-validator";
 
-    public static final GithubFullPath GITHUB_FULL_PATH = new GithubFullPath(GIT_USER, GIT_REPO);
+    public static final GHRepositoryPath GITHUB_FULL_PATH = new GHRepositoryPath(GIT_USER, GIT_REPO);
 
     @NotNull
     @Override
@@ -85,7 +85,7 @@ public class CsvGithubIssueSubmitter extends ErrorReportSubmitter {
     }
 
     protected void updateExistingIssue(GithubApiRequestExecutor githubExecutor, String issueId, String content) {
-        GithubApiRequest.Post<GithubIssueComment> createIssueCommentRequest =
+        GithubApiRequest.Post createIssueCommentRequest =
                 GithubApiRequests.Repos.Issues.Comments.create(
                         GithubServerPath.DEFAULT_SERVER,
                         GIT_USER,
