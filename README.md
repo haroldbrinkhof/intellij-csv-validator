@@ -5,12 +5,14 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/97769359388e44bfb7101346d510fccf)](https://www.codacy.com/app/github_124/intellij-csv-validator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SeeSharpSoft/intellij-csv-validator&amp;utm_campaign=Badge_Grade)
 [![BCH compliance](https://bettercodehub.com/edge/badge/SeeSharpSoft/intellij-csv-validator?branch=master)](https://bettercodehub.com/results/SeeSharpSoft/intellij-csv-validator/)
 
-# Lightweight CSV Plugin for JetBrains IDE family
+# Lightweight CSV Plugin for JetBrains IDE family - KBO version
 
 Compatible with _IntelliJ IDEA  PhpStorm  WebStorm  PyCharm  RubyMine  AppCode  CLion  Gogland  DataGrip  Rider  MPS  Android Studio_ - __2017.3.1 and newer__
 
 This plugin introduces CSV (_Comma-Separated Values_) as a language to Jetbrains IDE with a syntax definition, structured language elements and associated file types (.csv/.tsv/.psv).
 This enables default editor features like syntax validation, highlighting and inspections for CSV-alike files.
+
+KBO version adds support for KBO specific file format with irregularly sized csv rows over the complete file.
 
 ![CSV Plugin Example](./docs/example.png)
 

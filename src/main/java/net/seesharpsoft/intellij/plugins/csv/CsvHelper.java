@@ -177,6 +177,19 @@ public final class CsvHelper {
         return CsvFileAttributes.getInstance(getProject(psiFile)).hasValueSeparatorAttribute(getProject(psiFile), getVirtualFile(psiFile));
     }
 
+    public static boolean isNonExistentFieldGenerationAllowed(PsiFile psiFile) {
+        return isNonExistentFieldGenerationAllowed(getProject(psiFile), getVirtualFile(psiFile));
+    }
+
+    public static boolean isNonExistentFieldGenerationAllowed(Project project, VirtualFile virtualFile) {
+        return project == null ?
+                true : CsvFileAttributes.getInstance(project).isNonExistentFieldGenerationAllowed(project, virtualFile);
+    }
+
+    public static boolean hasNonExistentFieldGenerationAttribute(@NotNull PsiFile psiFile) {
+        return CsvFileAttributes.getInstance(getProject(psiFile)).hasValueSeparatorAttribute(getProject(psiFile), getVirtualFile(psiFile));
+    }
+
     public static @NotNull CsvEscapeCharacter getEscapeCharacter(CsvFile csvFile) {
         return getEscapeCharacter(csvFile.getContainingFile());
     }

@@ -7,11 +7,11 @@
 
     <description><![CDATA[
 
-        <p>Lightweight plugin for editing CSV/TSV/PSV files with a flexible Table Editor, syntax validation, structure highlighting, customizable coloring, new intentions and helpful inspections.</p><br>
+        <p>Lightweight plugin for editing CSV/TSV/PSV/KBOCSV files with a flexible Table Editor, syntax validation, structure highlighting, customizable coloring, new intentions and helpful inspections.</p><br>
         <img width="600" height="297" src="https://plugins.jetbrains.com/files/10037/screenshot_22766.png" /><br><br>
         <p><b>Features:</b><br>
         <ul>
-            <li>support for CSV/TSV/PSV file extensions</li>
+            <li>support for CSV/TSV/PSV/KBOCSV file extensions</li>
             <li>customizable Table Editor</li>
             <li>customizable text editor</li>
             <li>customizable column coloring</li>
@@ -30,6 +30,8 @@
         </ul>
         </p><br>
 
+        <p>
+        <b>KBOCSV support:</b> <em>KBOCSV files are recignized as such but treated as a csv files with the same separator but missing fields not being filled</em>
         <p>
         <b>TSV/PSV file support:</b> <em>TSV/PSV files are recognized as such but treated as a variant of CSV files, the same syntax highlighting and code style settings are applied.</em>
         <br><br>
@@ -72,11 +74,13 @@ NEW: Table Editor coloring
 <!--        <fileTypeFactory implementation="net.seesharpsoft.intellij.plugins.csv.CsvFileTypeFactory"/>-->
 <!--        <fileTypeFactory implementation="net.seesharpsoft.intellij.plugins.tsv.TsvFileTypeFactory"/>-->
 <!--        <fileTypeFactory implementation="net.seesharpsoft.intellij.plugins.psv.PsvFileTypeFactory"/>-->
+<!--        <fileTypeFactory implementation="net.seesharpsoft.intellij.plugins.kbocsv.KboCsvFileTypeFactory"/>-->
 
         <!-- version 193.* -->
         <fileType name="CSV" language="csv" implementationClass="net.seesharpsoft.intellij.plugins.csv.CsvFileType" extensions="csv" fieldName="INSTANCE"/>
         <fileType name="TSV" language="tsv" implementationClass="net.seesharpsoft.intellij.plugins.tsv.TsvFileType" extensions="tsv;tab" fieldName="INSTANCE"/>
         <fileType name="PSV" language="psv" implementationClass="net.seesharpsoft.intellij.plugins.psv.PsvFileType" extensions="psv" fieldName="INSTANCE"/>
+        <fileType name="KBOCSV" language="kbocsv" implementationClass="net.seesharpsoft.intellij.plugins.kbocsv.KboCsvFileType" extensions="kbocsv" fieldName="INSTANCE"/>
         <fileTypeOverrider implementation="net.seesharpsoft.intellij.plugins.csv.CsvFileTypeOverrider" />
 
         <lang.parserDefinition language="csv"
@@ -85,6 +89,8 @@ NEW: Table Editor coloring
                                implementationClass="net.seesharpsoft.intellij.plugins.tsv.TsvParserDefinition"/>
         <lang.parserDefinition language="psv"
                                implementationClass="net.seesharpsoft.intellij.plugins.psv.PsvParserDefinition"/>
+        <lang.parserDefinition language="kbocsv"
+                               implementationClass="net.seesharpsoft.intellij.plugins.kbocsv.KboCsvParserDefinition"/>
 
         <lang.syntaxHighlighterFactory language="csv"
                                        implementationClass="net.seesharpsoft.intellij.plugins.csv.highlighter.CsvSyntaxHighlighterFactory"/>

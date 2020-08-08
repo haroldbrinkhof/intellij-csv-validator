@@ -56,6 +56,7 @@ public abstract class CsvTableEditor implements FileEditor, FileEditorLocation {
     private CsvTableEditorState storedState = null;
 
     protected boolean tableIsEditable = true;
+    private boolean nonExistentFieldGenerationAllowed = true;
 
     public CsvTableEditor(@NotNull Project projectArg, @NotNull VirtualFile fileArg) {
         this.project = projectArg;
@@ -63,6 +64,7 @@ public abstract class CsvTableEditor implements FileEditor, FileEditorLocation {
         this.userDataHolder = new UserDataHolderBase();
         this.changeSupport = new PropertyChangeSupport(this);
         this.dataManagement = new TableDataHandler(this, TableDataHandler.MAX_SIZE);
+
     }
 
     @NotNull
@@ -165,19 +167,37 @@ public abstract class CsvTableEditor implements FileEditor, FileEditorLocation {
     protected String generateCsv(Object[][] data) {
         StringBuilder result = new StringBuilder();
         for (int row = 0; row < data.length; ++row) {
-            for (int column = 0; column < data[row].length; ++column) {
-                Object value = data[row][column];
-                result.append(sanitizeFieldValue(value));
-                if (column < data[row].length - 1) {
-                    result.append(this.currentSeparator.getCharacter());
-                }
-            }
-            if (row < data.length - 1 ||
-                    (CsvEditorSettings.getInstance().isFileEndLineBreak() && getColumnInfoMap().hasEmptyLastLine())) {
-                result.append("\n");
-            }
+            processRow(data, result, row);
         }
         return result.toString();
+    }
+
+    private void processRow(Object[][] data, StringBuilder result, int row) {
+        int length = determineRowLength(data[row]);
+        for (int column = 0; column < length; ++column) {
+            Object value = data[row][column];
+            result.append(sanitizeFieldValue(value));
+            if (column < length - 1) {
+                result.append(this.currentSeparator.getCharacter());
+            }
+        }
+        if (row < data.length - 1 ||
+                (CsvEditorSettings.getInstance().isFileEndLineBreak() && getColumnInfoMap().hasEmptyLastLine())) {
+            result.append("\n");
+        }
+    }
+
+    private int determineRowLength(Object[] row) {
+        return (this.nonExistentFieldGenerationAllowed)?row.length:calculateRowLength(row);
+    }
+
+    private int calculateRowLength(Object[] row){
+        int size = row.length;
+        for(int column = size - 1; column > 0; column--) {
+            if (!sanitizeFieldValue(row[column]).isEmpty()) {break;}
+            size = column;
+        }
+        return size;
     }
 
     @NotNull
@@ -319,6 +339,7 @@ public abstract class CsvTableEditor implements FileEditor, FileEditorLocation {
             this.psiFile = documentManager.getPsiFile(this.document);
             this.currentSeparator = CsvHelper.getValueSeparator(this.psiFile);
             this.currentEscapeCharacter = CsvHelper.getEscapeCharacter(this.psiFile);
+            this.nonExistentFieldGenerationAllowed = CsvHelper.isNonExistentFieldGenerationAllowed(this.psiFile);
         }
         return this.psiFile instanceof CsvFile ? (CsvFile) psiFile : null;
     }

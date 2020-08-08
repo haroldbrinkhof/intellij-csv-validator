@@ -105,6 +105,20 @@ public class CsvFileAttributes implements PersistentStateComponent<CsvFileAttrib
         }
     }
 
+    public boolean isNonExistentFieldGenerationAllowed(Project project, VirtualFile virtualFile) {
+        if (project == null || virtualFile == null || !(virtualFile.getFileType() instanceof LanguageFileType)) {
+            return true;
+        }
+
+        Language language = ((LanguageFileType) virtualFile.getFileType()).getLanguage();
+        if (language instanceof CsvNonExistentFieldGenerationHolder) {
+            return ((CsvNonExistentFieldGenerationHolder) language).isNonExistentFieldGenerationAllowed();
+        }
+
+        return true;
+
+    }
+
     public @NotNull
     CsvValueSeparator getValueSeparator(Project project, VirtualFile virtualFile) {
         if (project == null || virtualFile == null || !(virtualFile.getFileType() instanceof LanguageFileType)) {

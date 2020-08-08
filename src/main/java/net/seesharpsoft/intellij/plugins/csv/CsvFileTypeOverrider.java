@@ -3,6 +3,7 @@ package net.seesharpsoft.intellij.plugins.csv;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.impl.FileTypeOverrider;
 import com.intellij.openapi.vfs.VirtualFile;
+import net.seesharpsoft.intellij.plugins.kbocsv.KboCsvFileType;
 import net.seesharpsoft.intellij.plugins.psv.PsvFileType;
 import net.seesharpsoft.intellij.plugins.tsv.TsvFileType;
 import org.jetbrains.annotations.NotNull;
@@ -16,6 +17,8 @@ public class CsvFileTypeOverrider implements FileTypeOverrider {
             String extension = file.getExtension();
             if (extension != null) {
                 switch (extension.toLowerCase()) {
+                    case "kbocsv":
+                        return KboCsvFileType.INSTANCE;
                     case "csv":
                         return CsvFileType.INSTANCE;
                     case "tsv":
