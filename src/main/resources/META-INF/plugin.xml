@@ -1,9 +1,15 @@
 <idea-plugin>
+    <!--
     <id>net.seesharpsoft.intellij.plugins.csv</id>
-    <name>CSV Plugin</name>
+    -->
+    <id>be.fgov.economie.custom.plugins.kbocsv</id>
+    <name>CSV KBO edition</name>
+    <vendor url="https://github.com/haroldbrinkhof/intellij-csv-validator">Harold Brinkhof</vendor>
+    <!--
     <vendor url="https://github.com/SeeSharpSoft/intellij-csv-validator">
         Martin Sommer
     </vendor>
+-->
 
     <description><![CDATA[
 
