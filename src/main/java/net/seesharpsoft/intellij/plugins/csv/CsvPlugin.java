@@ -24,7 +24,14 @@ public class CsvPlugin implements StartupActivity {
     }
 
     protected static String getVersion() {
-        return getPluginDescriptor().getVersion();
+        String version = "2.14.0";
+        try {
+            version = getPluginDescriptor().getVersion();
+        }
+        catch(NullPointerException ignored){}
+
+        return version;
+
     }
 
     protected static String getChangeNotes() {
